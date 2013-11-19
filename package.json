@@ -1,0 +1,13 @@
+{
+  "description": "Add support for Subscript",
+  "name": "ep_subscript",
+  "version": "0.0.1",
+  "author": {
+    "name": "John McLear",
+    "email": "john@mclear.co.uk"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
