@@ -4,7 +4,7 @@ var _ = require('ep_etherpad-lite/static/js/underscore');
 
 // Bind the event handler to the toolbar buttons
 var postAceInit = function(hook, context){
-  $('#subscript').click(function(){
+  $('.subscript').click(function(){
     context.ace.callWithAce(function(ace){
       ace.ace_doToggleSubscript();
     },'insertsubscript' , true);

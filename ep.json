@@ -13,7 +13,8 @@
         "eejsBlock_editbarMenuLeft": "ep_subscript/index",
         "collectContentPre": "ep_subscript/static/js/shared",
         "collectContentPost": "ep_subscript/static/js/shared",
-        "getLineHTMLForExport": "ep_subscript/index"
+        "getLineHTMLForExport": "ep_subscript/index",
+        "eejsBlock_dd_format":"ep_subscript/index"
       }
     }
   ]

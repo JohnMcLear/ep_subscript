@@ -5,6 +5,11 @@ exports.eejsBlock_editbarMenuLeft = function (hook_name, args, cb) {
   return cb();
 }
 
+exports.eejsBlock_dd_format = function (hook_name, args, cb) {
+  args.content = args.content + eejs.require("ep_subscript/templates/fileMenu.ejs");
+  return cb();
+}
+
 function getInlineStyle(subscript) {
   return "subscript: "+subscript+";";
 }
