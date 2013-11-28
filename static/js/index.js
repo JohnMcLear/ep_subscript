@@ -11,6 +11,21 @@ var postAceInit = function(hook, context){
   })
 };
 
+exports.aceEditEvent = function(hook, call, info, rep, attr){
+  if(!(call.callstack.type == "handleClick") && !(call.callstack.type == "handleKeyEvent")) return false;
+
+  // the caret is in a new position..  Let's do some funky shit
+  if ( call.editorInfo.ace_getAttributeOnSelection("subscript") ) {
+    // show the button as being depressed..  Not sad, but active.. You know the drill bitches.
+   console.log("trying");
+    $('.subscript > a').addClass('activeButton');
+  }else{
+    $('.subscript > a').removeClass('activeButton');
+  }
+
+}
+
+
 // Our subscript attribute will result in a subscript:1 class
 function aceAttribsToClasses(hook, context){
   if(context.key == 'subscript'){
