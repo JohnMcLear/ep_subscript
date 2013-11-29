@@ -64,10 +64,15 @@ function doToggleSubscript(){
 }
 
 // Once ace is initialized, we set ace_doToggleSubscript and bind it to the context
-function aceInitialized(hook, context){
+exports.aceInitialized = function(hook, context){
   var editorInfo = context.editorInfo;
   editorInfo.ace_doToggleSubscript = _(doToggleSubscript).bind(context);
 }
+
+var aceRegisterBlockElements = function(){
+//  return [ "sub" ];
+}
+
 
 // Export all hooks
 exports.aceInitialized = aceInitialized;
