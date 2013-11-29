@@ -73,3 +73,7 @@ function aceInitialized(hook, context){
 exports.aceInitialized = aceInitialized;
 exports.postAceInit = postAceInit;
 exports.aceAttribsToClasses = aceAttribsToClasses;
+
+exports.aceRegisterBlockElements = function(){
+  return ["sub"];
+}
