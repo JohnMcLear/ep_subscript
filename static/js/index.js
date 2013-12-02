@@ -3,7 +3,7 @@ var $ = require('ep_etherpad-lite/static/js/rjquery').$;
 var _ = require('ep_etherpad-lite/static/js/underscore');
 
 // Bind the event handler to the toolbar buttons
-var postAceInit = function(hook, context){
+exports.postAceInit = function(hook, context){
   $('.subscript').click(function(){
     context.ace.callWithAce(function(ace){
       ace.ace_doToggleSubscript();
@@ -11,12 +11,17 @@ var postAceInit = function(hook, context){
   })
 };
 
+// Once ace is initialized, we set ace_doToggleSubscript and bind it to the context
+exports.aceInitialized = function(hook, context){
+  var editorInfo = context.editorInfo;
+  editorInfo.ace_doToggleSubscript = _(doToggleSubscript).bind(context);
+}
+
 exports.aceEditEvent = function(hook, call, info, rep, attr){
   // If it's not a click or a key event and the text hasn't changed then do nothing
   if(!(call.callstack.type == "handleClick") && !(call.callstack.type == "handleKeyEvent") && !(call.callstack.docTextChanged)){
     return false;
   }
-
   setTimeout(function(){ // avoid race condition..
     // the caret is in a new position..  Let's do some funky shit
     if ( call.editorInfo.ace_getAttributeOnSelection("subscript") ) {
@@ -62,20 +67,8 @@ function doToggleSubscript(){
   this.editorInfo.ace_toggleAttributeOnSelection("subscript");
 }
 
-// Once ace is initialized, we set ace_doToggleSubscript and bind it to the context
-exports.aceInitialized = function(hook, context){
-  var editorInfo = context.editorInfo;
-  editorInfo.ace_doToggleSubscript = _(doToggleSubscript).bind(context);
-}
-
-var aceRegisterBlockElements = function(){
-//  return [ "sub" ];
-}
-
 
 // Export all hooks
-exports.aceInitialized = aceInitialized;
-exports.postAceInit = postAceInit;
 exports.aceAttribsToClasses = aceAttribsToClasses;
 
 exports.aceRegisterBlockElements = function(){
