@@ -12,7 +12,6 @@ var postAceInit = function(hook, context){
 };
 
 exports.aceEditEvent = function(hook, call, info, rep, attr){
-
   // If it's not a click or a key event and the text hasn't changed then do nothing
   if(!(call.callstack.type == "handleClick") && !(call.callstack.type == "handleKeyEvent") && !(call.callstack.docTextChanged)){
     return false;
@@ -22,12 +21,11 @@ exports.aceEditEvent = function(hook, call, info, rep, attr){
     // the caret is in a new position..  Let's do some funky shit
     if ( call.editorInfo.ace_getAttributeOnSelection("subscript") ) {
       // show the button as being depressed..  Not sad, but active.. You know the drill bitches.
-     console.log("trying");
       $('.subscript > a').addClass('activeButton');
     }else{
       $('.subscript > a').removeClass('activeButton');
     }
-  },200);
+  },250);
 }
 
 
@@ -40,8 +38,9 @@ function aceAttribsToClasses(hook, context){
 
 // Here we convert the class subscript into a tag
 exports.aceCreateDomLine = function(name, context){
-  var cls = context.cls;
+  var cls = context.cls; // no use
   var domline = context.domline;
+
   var subscript = /(?:^| )subscript:([A-Za-z0-9]*)/.exec(cls);
   var tagIndex;
   if (subscript){
@@ -78,3 +77,8 @@ var aceRegisterBlockElements = function(){
 exports.aceInitialized = aceInitialized;
 exports.postAceInit = postAceInit;
 exports.aceAttribsToClasses = aceAttribsToClasses;
+
+exports.aceRegisterBlockElements = function(){
+  return ["sub"];
+}
+
