@@ -37,7 +37,7 @@ exports.aceEditEvent = function(hook, call, info, rep, attr){
 // Our subscript attribute will result in a subscript:1 class
 function aceAttribsToClasses(hook, context){
   if(context.key == 'subscript'){
-    return ['subscript:' + 1 ];
+    return ['subscript' ];
   }
 }
 
@@ -46,7 +46,7 @@ exports.aceCreateDomLine = function(name, context){
   var cls = context.cls; // no use
   var domline = context.domline;
 
-  var subscript = /(?:^| )subscript:([A-Za-z0-9]*)/.exec(cls);
+  var subscript = /(?:^| )subscript([A-Za-z0-9]*)/.exec(cls);
   var tagIndex;
   if (subscript){
     tagIndex = true;

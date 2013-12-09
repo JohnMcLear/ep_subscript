@@ -6,8 +6,8 @@ var collectContentPre = function(hook, context){
   var lineAttributes = state.lineAttributes
   var tagIndex = tname;
 
-  if(tagIndex >= 0){
-    lineAttributes['subscript'] = tagIndex;
+  if(tname == "sub"){
+    context.cc.doAttrib(state, "subscript");
   }
 };
 
