@@ -15,21 +15,22 @@ function getInlineStyle(subscript) {
 }
 // line, apool,attribLine,text
 exports.getLineHTMLForExport = function (hook, context) {
-  var header = _analyzeLine(context.attribLine, context.apool);
-  if (header) {
-    var inlineStyle = getInlineStyle(header);
-    return "<sup>" + context.text.substring(1) + "</sup>";
+  var styleApplied = _analyzeLine(context.attribLine, context.apool);
+  if (styleApplied) {
+    var inlineStyle = getInlineStyle(styleApplied);
+    return "<sub>" + context.text.substring(0) + "</sub>";
   }
 }
 
 function _analyzeLine(alineAttrs, apool) {
-  var header = null;
+  var hasStyle = null;
   if (alineAttrs) {
     var opIter = Changeset.opIterator(alineAttrs);
     if (opIter.hasNext()) {
       var op = opIter.next();
-      header = Changeset.opAttributeValue(op, 'subscript', apool);
+      hasStyle = Changeset.opAttributeValue(op, 'subscript', apool);
     }
   }
-  return header;
+  console.warn(hasStyle);
+  return hasStyle;
 }
