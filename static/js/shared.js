@@ -1,5 +1,3 @@
-var _ = require('ep_etherpad-lite/static/js/underscore');
-
 exports.collectContentPre = function(hook, context){
   var tname = context.tname;
   var state = context.state;
