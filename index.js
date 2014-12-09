@@ -23,6 +23,7 @@ exports.eejsBlock_dd_format = function (hook_name, args, cb) {
 // Allow <whatever> to be an attribute 
 exports.aceAttribClasses = function(hook_name, attr, cb){
   attr.sub = 'tag:sub';
+  console.warn(attr);
   cb(attr);
 }
 
@@ -34,3 +35,7 @@ exports.stylesForExport = function(hook, padId, cb){
   cb("sub{vertical-align:sub;font-size:smaller}");  
 };
 
+// Add the props to be supported in export
+exports.exportHtmlAdditionalTags = function(hook, pad, cb){
+  cb("sub");
+};

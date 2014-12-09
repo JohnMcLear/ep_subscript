@@ -20,7 +20,8 @@
         "collectContentPost": "ep_subscript/static/js/shared",
         "eejsBlock_dd_format":"ep_subscript/index",
         "aceAttribClasses":"ep_subscript/index",
-        "stylesForExport" : "ep_subscript/index"
+        "stylesForExport" : "ep_subscript/index",
+        "exportHtmlAdditionalTags" : "ep_subscript/index"
       }
     }
   ]
