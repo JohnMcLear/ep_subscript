@@ -46,3 +46,8 @@ exports.aceAttribClasses = function(hook_name, attr, cb){
   attr.sub = 'tag:sub';
   cb(attr);
 }
+
+exports.stylesForExport = function(hook, padId, cb){
+  cb("sub{vertical-align:sub;font-size:smaller}");  
+};
+

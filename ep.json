@@ -19,7 +19,8 @@
         "collectContentPost": "ep_subscript/static/js/shared",
         "getLineHTMLForExport": "ep_subscript/index",
         "eejsBlock_dd_format":"ep_subscript/index",
-        "aceAttribClasses":"ep_subscript/index"
+        "aceAttribClasses":"ep_subscript/index",
+        "stylesForExport" : "ep_subscript/index"
       }
     }
   ]
