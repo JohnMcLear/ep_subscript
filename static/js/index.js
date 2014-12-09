@@ -24,7 +24,7 @@ exports.aceEditEvent = function(hook, call, info, rep, attr){
   }
   setTimeout(function(){ // avoid race condition..
     // the caret is in a new position..  Let's do some funky shit
-    if ( call.editorInfo.ace_getAttributeOnSelection("subscript") ) {
+    if ( call.editorInfo.ace_getAttributeOnSelection("sub") ) {
       // show the button as being depressed..  Not sad, but active.. You know the drill bitches.
       $('.subscript > a').addClass('activeButton');
     }else{
@@ -36,8 +36,8 @@ exports.aceEditEvent = function(hook, call, info, rep, attr){
 
 // Our subscript attribute will result in a subscript:1 class
 function aceAttribsToClasses(hook, context){
-  if(context.key == 'subscript'){
-    return ['subscript' ];
+  if(context.key == 'sub'){
+    return ['sub' ];
   }
 }
 
@@ -46,7 +46,7 @@ exports.aceCreateDomLine = function(name, context){
   var cls = context.cls; // no use
   var domline = context.domline;
 
-  var subscript = /(?:^| )subscript([A-Za-z0-9]*)/.exec(cls);
+  var subscript = /(?:^| )sub([A-Za-z0-9]*)/.exec(cls);
   var tagIndex;
   if (subscript){
     tagIndex = true;
@@ -64,7 +64,7 @@ exports.aceCreateDomLine = function(name, context){
 };
 
 function doToggleSubscript(){
-  this.editorInfo.ace_toggleAttributeOnSelection("subscript");
+  this.editorInfo.ace_toggleAttributeOnSelection("sub");
 }
 
 
@@ -73,5 +73,10 @@ exports.aceAttribsToClasses = aceAttribsToClasses;
 
 exports.aceRegisterBlockElements = function(){
   return ["sub"];
+}
+
+exports.aceAttribClasses = function(hook, attr){
+  // console.warn("attr", attr);
+  attr["sub"] = "tag:sub";
 }
 
