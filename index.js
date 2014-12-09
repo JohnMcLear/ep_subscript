@@ -5,6 +5,7 @@ var Changeset = require("ep_etherpad-lite/static/js/Changeset");
 * UI 
 */ 
 exports.eejsBlock_editbarMenuLeft = function (hook_name, args, cb) {
+  args.content = args.content + eejs.require("ep_subscript/templates/editbarButtons.ejs");
   return cb();
 }
 

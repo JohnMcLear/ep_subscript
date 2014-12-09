@@ -35,43 +35,15 @@ exports.aceEditEvent = function(hook, call, info, rep, attr){
 
 
 // Our subscript attribute will result in a subscript:1 class
-function aceAttribsToClasses(hook, context){
+exports.aceAttribsToClasses = function(hook, context){
   if(context.key == 'sub'){
     return ['sub' ];
   }
 }
 
-// Here we convert the class subscript into a tag
-exports.aceCreateDomLine = function(name, context){
-/*
-  var cls = context.cls; // no use
-  var domline = context.domline;
-
-  var subscript = /(?:^| )sub([A-Za-z0-9]*)/.exec(cls);
-  var tagIndex;
-  if (subscript){
-    tagIndex = true;
-  }
-
-  if (tagIndex){
-    var modifier = {
-      extraOpenTags: '<sub>',
-      extraCloseTags: '</sub>',
-      cls: cls
-    };
-    return [modifier];
-  }
-*/
-  return [];
-};
-
 function doToggleSubscript(){
   this.editorInfo.ace_toggleAttributeOnSelection("sub");
 }
-
-
-// Export all hooks
-exports.aceAttribsToClasses = aceAttribsToClasses;
 
 exports.aceRegisterBlockElements = function(){
   return ["sub"];
