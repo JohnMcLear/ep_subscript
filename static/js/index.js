@@ -48,7 +48,7 @@ exports.aceEditEvent = function(hook, call, cb){
 // Our subscript attribute will result in a subscript:1 class
 exports.aceAttribsToClasses = function(hook, context){
   if(context.key == 'sub'){
-    return ['sub' ];
+    return ['sub'];
   }
 }
 
