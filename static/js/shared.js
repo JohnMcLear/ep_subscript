@@ -1,6 +1,6 @@
 var _ = require('ep_etherpad-lite/static/js/underscore');
 
-var collectContentPre = function(hook, context){
+exports.collectContentPre = function(hook, context){
   var tname = context.tname;
   var state = context.state;
   var lineAttributes = state.lineAttributes
@@ -10,7 +10,7 @@ var collectContentPre = function(hook, context){
   }
 };
 
-var collectContentPost = function(hook, context){
+exports.collectContentPost = function(hook, context){
   var tname = context.tname;
   var state = context.state;
   var lineAttributes = state.lineAttributes
@@ -20,6 +20,3 @@ var collectContentPost = function(hook, context){
     delete lineAttributes['sub'];
   }
 };
-
-exports.collectContentPre = collectContentPre;
-exports.collectContentPost = collectContentPost;
