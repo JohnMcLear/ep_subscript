@@ -43,6 +43,7 @@ function aceAttribsToClasses(hook, context){
 
 // Here we convert the class subscript into a tag
 exports.aceCreateDomLine = function(name, context){
+/*
   var cls = context.cls; // no use
   var domline = context.domline;
 
@@ -60,6 +61,7 @@ exports.aceCreateDomLine = function(name, context){
     };
     return [modifier];
   }
+*/
   return [];
 };
 
