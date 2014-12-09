@@ -10,7 +10,9 @@
         "collectContentPre": "ep_subscript/static/js/shared",
         "aceEditEvent": "ep_subscript/static/js/index",
         "aceRegisterBlockElements": "ep_subscript/static/js/index",
-        "aceAttribClasses":"ep_subscript/static/js/index"
+        "aceAttribClasses":"ep_subscript/static/js/index",
+        "collectContentPre": "ep_subscript/static/js/shared",
+        "collectContentPost": "ep_subscript/static/js/shared"
       },
       "hooks": {
         "eejsBlock_editbarMenuLeft": "ep_subscript/index",

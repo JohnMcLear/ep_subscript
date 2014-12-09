@@ -5,9 +5,8 @@ var collectContentPre = function(hook, context){
   var state = context.state;
   var lineAttributes = state.lineAttributes
   var tagIndex = tname;
-
   if(tname == "sub"){
-    context.cc.doAttrib(state, "subscript");
+    context.cc.doAttrib(state, "sub");
   }
 };
 
@@ -18,7 +17,7 @@ var collectContentPost = function(hook, context){
   var tagIndex = tname;
 
   if(tagIndex >= 0){
-    delete lineAttributes['subscript'];
+    delete lineAttributes['sub'];
   }
 };
 
