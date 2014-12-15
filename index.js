@@ -23,7 +23,6 @@ exports.eejsBlock_dd_format = function (hook_name, args, cb) {
 // Allow <whatever> to be an attribute 
 exports.aceAttribClasses = function(hook_name, attr, cb){
   attr.sub = 'tag:sub';
-  console.warn(attr);
   cb(attr);
 }
 

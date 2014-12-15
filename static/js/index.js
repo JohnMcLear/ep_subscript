@@ -61,7 +61,15 @@ exports.aceRegisterBlockElements = function(){
 }
 
 exports.aceAttribClasses = function(hook, attr){
-  // console.warn("attr", attr);
+  // TODO Properly Support Setting Attrs on timeslider..
+  // The issue is that the pad object is not available on teh timeslider
+  // The fix is probably to do a direct socket request for styleIds
+  // or something much cleaner..
+  // A cleaner way would be to move the code out of postAceInit hook
+  // To something more globally used..
+  // we use pad.collabClient to send messages to the socket server.. FML
+
+  // Below we hard code so it's fine but it needs fixing.
   attr["sub"] = "tag:sub";
 }
 
