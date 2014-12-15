@@ -2,21 +2,23 @@ var _, $, jQuery;
 var $ = require('ep_etherpad-lite/static/js/rjquery').$;
 var _ = require('ep_etherpad-lite/static/js/underscore');
 
+/*****
+* Basic setup
+******/
+
 // Bind the event handler to the toolbar buttons
 exports.postAceInit = function(hook, context){
   $('.subscript').click(function(){
     context.ace.callWithAce(function(ace){
-      ace.ace_doToggleSubscript();
+      ace.ace_toggleAttributeOnSelection("sub");
     },'insertsubscript' , true);
   })
 };
 
-// Once ace is initialized, we set ace_doToggleSubscript and bind it to the context
-exports.aceInitialized = function(hook, context){
-  var editorInfo = context.editorInfo;
-  editorInfo.ace_doToggleSubscript = _(doToggleSubscript).bind(context);
-}
-
+// Show the subscript button as depressed when subscript is active 
+// at the caret location
+// TODO: create a postAceEditEvent hook that is fired once ace events
+// have been fully processed by the content collector.
 exports.aceEditEvent = function(hook, call, cb){
   // If it's not a click or a key event and the text hasn't changed then do nothing
   var cs = call.callstack;
@@ -44,32 +46,33 @@ exports.aceEditEvent = function(hook, call, cb){
   },250);
 }
 
+// Toggle Subscript when the button is pressed
+//function doToggleSubscript(){
+//  this.editorInfo.ace_toggleAttributeOnSelection("sub");
+//}
 
-// Our subscript attribute will result in a subscript:1 class
+/*****
+* Editor setup
+******/
+
+// Our subscript attribute will result in a class
+// I'm not sure if this is actually required..
 exports.aceAttribsToClasses = function(hook, context){
   if(context.key == 'sub'){
     return ['sub'];
   }
 }
 
-function doToggleSubscript(){
-  this.editorInfo.ace_toggleAttributeOnSelection("sub");
-}
-
+// Block elements
+// I'm not sure if this is actually required..
 exports.aceRegisterBlockElements = function(){
   return ["sub"];
 }
 
+// Register attributes that are html markup / blocks not just classes
+// This should make export export properly IE <sub>helllo</sub>world
+// will be the output and not <span class=sub>helllo</span>
 exports.aceAttribClasses = function(hook, attr){
-  // TODO Properly Support Setting Attrs on timeslider..
-  // The issue is that the pad object is not available on teh timeslider
-  // The fix is probably to do a direct socket request for styleIds
-  // or something much cleaner..
-  // A cleaner way would be to move the code out of postAceInit hook
-  // To something more globally used..
-  // we use pad.collabClient to send messages to the socket server.. FML
-
-  // Below we hard code so it's fine but it needs fixing.
   attr["sub"] = "tag:sub";
 }
 
