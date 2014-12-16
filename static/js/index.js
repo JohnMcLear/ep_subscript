@@ -28,14 +28,16 @@ exports.aceEditEvent = function(hook, call, cb){
   // If it's an initial setup event then do nothing..
   if(cs.type == "setBaseText" || cs.type == "setup") return false;
 
-  // Attribtes are never available on the first X caret position so we need to ignore that
-  if(call.rep.selStart[1] == 1){
-    // Attributes are never on the first line
-    $('.subscript > a').removeClass('activeButton');
-  }
-
   // It looks like we should check to see if this section has this attribute
   setTimeout(function(){ // avoid race condition..
+
+    // Attribtes are never available on the first X caret position so we need to ignore that
+    if(call.rep.selStart[1] === 0){
+      // Attributes are never on the first line
+      $('.subscript > a').removeClass('activeButton');
+      return;
+    }
+
     // the caret is in a new position..  Let's do some funky shit
     if ( call.editorInfo.ace_getAttributeOnSelection("sub") ) {
       // show the button as being depressed..  Not sad, but active..
@@ -45,11 +47,6 @@ exports.aceEditEvent = function(hook, call, cb){
     }
   },250);
 }
-
-// Toggle Subscript when the button is pressed
-//function doToggleSubscript(){
-//  this.editorInfo.ace_toggleAttributeOnSelection("sub");
-//}
 
 /*****
 * Editor setup
