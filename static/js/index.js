@@ -59,6 +59,11 @@ exports.aceCreateDomLine = function(name, context){
   return [];
 };
 
+// Block elements
+exports.aceRegisterBlockElements = function(){
+  return ["sub"];
+}
+
 // Export all hooks
 exports.postAceInit = postAceInit;
 exports.aceAttribsToClasses = aceAttribsToClasses;
