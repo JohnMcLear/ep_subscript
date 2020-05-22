@@ -1,45 +1,29 @@
-var $, jQuery;
+var _, $, jQuery;
 var $ = require('ep_etherpad-lite/static/js/rjquery').$;
-
-/*****
-* Basic setup
-******/
+var _ = require('ep_etherpad-lite/static/js/underscore');
 
 // Bind the event handler to the toolbar buttons
-exports.postAceInit = function(hook, context){
+var postAceInit = function(hook, context){
   $('.subscript').click(function(){
     context.ace.callWithAce(function(ace){
-      ace.ace_toggleAttributeOnSelection("sub");
+      if(ace.ace_getAttributeOnSelection("subscript")){
+        ace.ace_setAttributeOnSelection("subscript", false);
+      }else{
+        ace.ace_setAttributeOnSelection("subscript", true);
+      }
     },'insertsubscript' , true);
   })
 };
 
-// Show the subscript button as depressed when subscript is active 
-// at the caret location
-// TODO: create a postAceEditEvent hook that is fired once ace events
-// have been fully processed by the content collector.
-exports.aceEditEvent = function(hook, call, cb){
+exports.aceEditEvent = function(hook, call, info, rep, attr){
   // If it's not a click or a key event and the text hasn't changed then do nothing
-  var cs = call.callstack;
-  if(!(cs.type == "handleClick") && !(cs.type == "handleKeyEvent") && !(cs.docTextChanged)){
+  if(!(call.callstack.type == "handleClick") && !(call.callstack.type == "handleKeyEvent") && !(call.callstack.docTextChanged)){
     return false;
   }
-  // If it's an initial setup event then do nothing..
-  if(cs.type == "setBaseText" || cs.type == "setup") return false;
-
-  // It looks like we should check to see if this section has this attribute
   setTimeout(function(){ // avoid race condition..
-
-    // Attribtes are never available on the first X caret position so we need to ignore that
-    if(call.rep.selStart[1] === 0){
-      // Attributes are never on the first line
-      $('.subscript > a').removeClass('activeButton');
-      return;
-    }
-
     // the caret is in a new position..  Let's do some funky shit
-    if ( call.editorInfo.ace_getAttributeOnSelection("sub") ) {
-      // show the button as being depressed..  Not sad, but active..
+    if ( call.editorInfo.ace_getAttributeOnSelection("subscript") ) {
+      // show the button as being depressed..  Not sad, but active.. You know the drill bitches.
       $('.subscript > a').addClass('activeButton');
     }else{
       $('.subscript > a').removeClass('activeButton');
@@ -47,28 +31,34 @@ exports.aceEditEvent = function(hook, call, cb){
   },250);
 }
 
-/*****
-* Editor setup
-******/
-
-// Our subscript attribute will result in a class
-// I'm not sure if this is actually required..
-exports.aceAttribsToClasses = function(hook, context){
-  if(context.key == 'sub'){
-    return ['sub'];
+// Our subscript attribute will result in a subscript:1 class
+function aceAttribsToClasses(hook, context){
+  if(context.key == 'subscript'){
+    return ['subscript:' + 1 ];
   }
 }
 
-// Block elements
-// I'm not sure if this is actually required..
-exports.aceRegisterBlockElements = function(){
-  return ["sub"];
-}
+// Here we convert the class subscript into a tag
+exports.aceCreateDomLine = function(name, context){
+  var cls = context.cls;
+  var domline = context.domline;
+  var subscript = /(?:^| )subscript:([A-Za-z0-9]*)/.exec(cls);
+  var tagIndex;
+  if (subscript){
+    tagIndex = true;
+  }
 
-// Register attributes that are html markup / blocks not just classes
-// This should make export export properly IE <sub>helllo</sub>world
-// will be the output and not <span class=sub>helllo</span>
-exports.aceAttribClasses = function(hook, attr){
-  attr["sub"] = "tag:sub";
-}
+  if (tagIndex){
+    var modifier = {
+      extraOpenTags: '<sub>',
+      extraCloseTags: '</sub>',
+      cls: cls
+    };
+    return [modifier];
+  }
+  return [];
+};
 
+// Export all hooks
+exports.postAceInit = postAceInit;
+exports.aceAttribsToClasses = aceAttribsToClasses;

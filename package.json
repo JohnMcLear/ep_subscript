@@ -1,13 +1,39 @@
 {
-  "description": "Add support for Subscript",
-  "name": "ep_subscript",
-  "version": "0.0.9",
+  "_from": "ep_subscript",
+  "_id": "ep_subscript@0.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-MDerMA34bn6LjlJArI5aqwso/9xcUjs7qEtoxl66ASRdqXsPbbz6lFlK6T/dGnvX6BRH8WIOmK06opNYF4Bs1w==",
+  "_location": "/ep_subscript",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ep_subscript",
+    "name": "ep_subscript",
+    "escapedName": "ep_subscript",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ep_subscript/-/ep_subscript-0.1.0.tgz",
+  "_shasum": "a6bc54a52f8e210c00888a72e65e34e8bd125486",
+  "_spec": "ep_subscript",
+  "_where": "/home/jose",
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk"
   },
+  "bundleDependencies": false,
   "dependencies": {},
+  "deprecated": false,
+  "description": "subscript",
   "engines": {
     "node": "*"
-  }
+  },
+  "name": "ep_subscript",
+  "version": "0.1.0"
 }
